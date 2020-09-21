@@ -1,0 +1,30 @@
+Game rules:
+  collect good toppings until you can bake your pizza
+  Each new level has 2 second pause + title(level #)
+  toppings fall from top of screen
+  only "good toppings" are caught
+  toppings increase vertically as stacked on pizza
+  spawning:
+    10 good toppings to 3 bad
+    10% increase(increase what?) every level
+    4 bad toppings ends game
+    speed of falling toppings increases 2.5% each level
+  3(actually 4) lives(minus 1 when bad topping caught)
+
+Screens:
+  splash
+  ad screen
+  main menu
+    -Title
+    -Play button
+    -background image
+    -music button(on/off)
+  Pause
+    -resume
+    -score
+    -quit
+    -music button(on/off)
+  game scenes
+    -
+  game over screen
+  scores screen
