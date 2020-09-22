@@ -17,6 +17,7 @@ import pineapplePNG from './assets/toppings/pineapple.png'
 import tomatoPNG from './assets/toppings/tomato.png'
 import splash_background from './assets/backgrounds/splash_screen.jpg'
 import game_background from './assets/backgrounds/game_background.jpg'
+import player from './assets/player.png'
 
 import ui_left from './assets/UI/left.png'
 import ui_right from './assets/UI/right.png'
@@ -31,6 +32,7 @@ import constants from './constants.js'
 
 //Import scenes
 import game_scene from './game.js'
+import menu_scene from './menu.js'
 
 
 let width = window.innerWidth;
@@ -45,11 +47,12 @@ let config = {
   physics: {
       default: 'arcade',
       arcade: {
-          gravity: { y: 200 }
+          gravity: { y: 80 }
       }
   },
   scene: [
     splash_screen,
+    menu_scene,
     game_scene,
     // gameover_scene
   ],
@@ -80,6 +83,7 @@ splash_screen.preload = function() {
 
 
   //Player(pizza)
+  this.load.image("player", player)
 
 
   // UI:
@@ -97,13 +101,14 @@ splash_screen.preload = function() {
   progressBox.fillStyle(0x222222, 0.8);
   progressBox.fillRect(width * 0.25, height * 0.6, width * 0.5, 30);
 
+//Add title text
   let title = this.make.text({
      x: width/2, y:height/3, text:"Pizza\nStacker",
      style: {...constants.font_configs.xl, color: '#ffffff'}
   }).setOrigin(0.5);
 
 
-
+//Add loading text
   let loading = this.make.text({
      x: width* 0.5, y:height * 0.5, text:"Loading....",
      style: {...constants.font_configs.l, color: '#ffffff'}
@@ -119,27 +124,9 @@ splash_screen.preload = function() {
   this.load.on('complete', () => {
     progressBar.destroy()
     progressBox.destroy()
-  })
-
-
-}
-
-//Create
-splash_screen.create = function() {
-  console.log(width, height)
-  let bg = this.add.image(width/2, height/2, "splash_background")
-  let ratio = height / bg.height
-  bg.setDisplaySize(bg.width  * ratio - 300, bg.height * ratio)
-
-  let title = this.make.text({
-     x: width/2, y:height/3, text:"Pizza\nStacker",
-     style: {...constants.font_configs.xl, color: '#000000'}
-  }).setOrigin(0.5);
-
-  this.startButton = this.add.sprite(width * 0.5, height * 0.7, 'ui_start').setDisplaySize(width*0.3, 135).setOrigin(0.5).setInteractive()
-  this.startButton.on('pointerup', () => {
     this.scene.stop('splash_screen')
-    this.scene.start('game_scene')
+    this.scene.start('menu_scene')
   })
+
 
 }
